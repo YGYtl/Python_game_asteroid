@@ -1,0 +1,1 @@
+from game import player, load, resources, meteorite, physicalobject
