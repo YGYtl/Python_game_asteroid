@@ -22,7 +22,7 @@ score = 0
 num_stars = 3
 num_meteorites = 1
 game_objects = []
-time_left = 36000
+time_left = 1200
 count = 0
 level = 0
 
@@ -34,7 +34,7 @@ def init():
     global score, num_stars, num_meteorites, time_left, count
 
     score = 0
-    time_left = 36000
+    time_left = 1200
     count = 0
     score_label.text = "Score: " + str(score)
     time_label.text = "Time: " + str((time_left-count)//120)
@@ -154,7 +154,9 @@ def update(dt):
 
 
     if player_dead or count >= time_left:
-        if len(player_lives) > 0 and count < time_left:
+        if len(player_lives) > 0 and count <= time_left:
+            if count == time_left:
+                player_airship.delete()
             count = 0
             reset_level(len(player_lives) - 1)
         else:
@@ -168,6 +170,7 @@ def update(dt):
         count = 0
         time_left += level*1440
         reset_level(len(player_lives))
+
 
 
 if __name__ == "__main__":
